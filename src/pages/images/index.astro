@@ -1,0 +1,41 @@
+---
+// https://docs.astro.build/en/guides/images/
+
+import { Image } from "astro:assets";
+import MainLayout from "../../layouts/MainLayout.astro";
+
+
+import post05Img from '@images/post-05.png'
+---
+
+<MainLayout title="Imágenes">
+  <h1 class="text-5xl text-white">Imágenes</h1>
+
+  <img
+    loading="eager"
+    src="/assets/images/post-05.png"
+    width="300"
+    height="300"
+  />
+
+  <Image
+    src={post05Img}
+    width="300"
+    height="300"
+    alt="Post 05"
+  />
+
+  <div
+    style={{
+      height: "3000px",
+    }}
+  >
+  </div>
+
+  <img
+    loading="lazy"
+    src="/assets/images/post-04.png"
+    width="300"
+    height="300"
+  />
+</MainLayout>

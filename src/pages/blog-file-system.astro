@@ -1,10 +1,12 @@
 ---
-import { getCollection } from "astro:content";
 import { siteConfig } from "../config/site-config";
 import MainLayout from "../layouts/MainLayout.astro";
-import TypedBlogPost from "src/components/TypedBlogPost.astro";
+import BlogPost from "../components/BlogPost.astro";
 
-const blogPosts = await getCollection("blog")
+// https://docs.astro.build/en/reference/api-reference/
+const posts = await Astro.glob("./posts-old/*.{md,mdx}");
+// si quisieramos hacer una paginacion, tomamos todos los post y lo mandamos a llamar por el getStaticPaths, le mandamos la pagination y gg
+// console.log(posts);
 ---
 
 <MainLayout title="Home">
@@ -16,7 +18,7 @@ const blogPosts = await getCollection("blog")
       </h1>
 
       <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
-        {blogPosts.map((post) => <TypedBlogPost post={post} />)}
+        {posts.map((post) => <BlogPost {...post} />)}
       </div>
     </div>
   </section>
