@@ -1,11 +1,10 @@
 ---
 // https://docs.astro.build/en/guides/images/
 
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 import MainLayout from "../../layouts/MainLayout.astro";
 
-
-import post05Img from '@images/post-05.png'
+import post05Img from "@images/post-05.png";
 ---
 
 <MainLayout title="Imágenes">
@@ -18,11 +17,53 @@ import post05Img from '@images/post-05.png'
     height="300"
   />
 
+  <Image src={post05Img} width="300" height="300" alt="Post 05" />
+
   <Image
+    src={post05Img}
+    style={{
+      height: "300px",
+      width: "300px",
+    }}
+    alt="Post 05"
+  />
+
+  <h1>Quality low</h1>
+  <Image src={post05Img} quality="low" width="300" height="300" alt="Post 05" />
+  <h1>Quality high</h1>
+  <Image
+    src={post05Img}
+    quality="high"
+    width="300"
+    height="300"
+    alt="Post 05"
+  />
+  <h1>Formatos</h1>
+  <Image src={post05Img} format="jpg" width="300" height="300" alt="Post 05" />
+
+  <!-- Image pero con esteroide, si no anda jpg tendremos png -->
+  <h1>Picture</h1>
+  <!-- <Picture src={post05Img} formats={["jpg", "png", "webp"]} width="300" height="300" alt="Post 05" /> -->
+
+  <Picture
+    src={post05Img}
+    widths={[240, 540, 720, post05Img.width]}
+    sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${post05Img.width}px`}
+    width="300"
+    height="300"
+    alt="Post 05"
+  />
+  <!-- 4 temeños en el widths el post05Img.width es la origina  -->
+  <!-- en el sizes cuando el with es de 360 usamos la de 240px y asi -->
+
+  <!-- tamaño de acuerdo a la densidad de pixeles -->
+  <Picture
     src={post05Img}
     width="300"
     height="300"
     alt="Post 05"
+    width={post05Img.width / 2}
+    densities={[1.5, 2]}
   />
 
   <div
@@ -39,3 +80,9 @@ import post05Img from '@images/post-05.png'
     height="300"
   />
 </MainLayout>
+
+<style>
+  h1 {
+    @apply text-white mt-10;
+  }
+</style>

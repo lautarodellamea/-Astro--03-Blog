@@ -4,18 +4,20 @@ import { defineCollection, z } from "astro:content";
 
 const blogCollection = defineCollection({
     type: "content",
-    schema: z.object({
+    schema: ({ image }) => z.object({
         title: z.string(),
         date: z.date(),
         description: z.string(),
-        image: z.string(),
+        image: image().refine(img => img.height < 1200, {
+            message: "La imagen debe ser menor a 1200px",
+        }),
 
         // relacion
         author: z.string(),
 
         // relacion
         tags: z.array(z.string()),
-        
+
         // draft: z.boolean(),
     })
 });
@@ -23,6 +25,6 @@ const blogCollection = defineCollection({
 
 export const collections = {
     // en el directorio dentro de content deberemos ponerle el nombre blog
-    blog: blogCollection
+    blog: blogCollection,
 }
 
